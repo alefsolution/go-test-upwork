@@ -1,24 +1,31 @@
 package main
 
 import (
-	"fmt"
+	"errors"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	testValidity("12-hello-35-world")
 }
 
-func testValidity(arg string) bool {
+func testValidity(arg string) ([]int, []string, error) {
 	originalSamples := strings.Split(arg, "-")
+	numberSamples := []int{}
+	stringSamples := []string{}
 	for idx, sample := range originalSamples {
 		if idx%2 == 0 {
-			if _, err := strconv.Atoi(sample); err != nil {
-				fmt.Println("it's not valid")
-				return false
+			numberSample, err := strconv.Atoi(sample)
+			if err != nil {
+				return nil, nil, errors.New("Given string is not valid")
 			}
+			numberSamples = append(numberSamples, numberSample)
+		} else {
+			stringSamples = append(stringSamples, sample)
 		}
 	}
-	return true
+	return numberSamples, stringSamples, nil
+}
+
+func getAverageNumber(arg string) {
 }

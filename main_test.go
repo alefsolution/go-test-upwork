@@ -4,20 +4,16 @@ import (
 	"testing"
 )
 
-type testValidityTest struct {
-	arg      string
-	expected bool
-}
-
-var testValidityTests = []testValidityTest{
-	{"12-hello-34-world", true},
-	{"12-hello-h4-world", false},
+var testValidityTests = []string{
+	"12-hello-34-world",
+	"12-hello-h4-world",
 }
 
 func TestTestValidity(t *testing.T) {
-	for _, test := range testValidityTests {
-		if output := testValidity(test.arg); output != test.expected {
-			t.Errorf("Output %v not equal to expected %v", output, test.expected)
-		}
+	if _, _, err := testValidity(testValidityTests[0]); err != nil {
+		t.Errorf("Validation should success but failed")
+	}
+	if _, _, err := testValidity(testValidityTests[1]); err == nil {
+		t.Errorf("Validation should fail but succeeded")
 	}
 }
