@@ -27,5 +27,14 @@ func testValidity(arg string) ([]int, []string, error) {
 	return numberSamples, stringSamples, nil
 }
 
-func getAverageNumber(arg string) {
+func getAverageNumber(arg string) int {
+	numberSamples, _, err := testValidity(arg)
+	if err != nil {
+		panic("Given string is not valid")
+	}
+	sum := 0
+	for i := 0; i < len(numberSamples); i++ {
+		sum += numberSamples[i]
+	}
+	return sum / len(numberSamples)
 }

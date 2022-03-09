@@ -17,3 +17,11 @@ func TestTestValidity(t *testing.T) {
 		t.Errorf("Validation should fail but succeeded")
 	}
 }
+
+func TestGetAverageNumber(t *testing.T) {
+	sampleString := "10-hello-20-world"
+	expected := 15
+	if avg := getAverageNumber(sampleString); avg != expected {
+		t.Errorf("Expected %d, but got %d", expected, avg)
+	}
+}
