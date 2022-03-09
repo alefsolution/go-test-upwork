@@ -25,3 +25,11 @@ func TestGetAverageNumber(t *testing.T) {
 		t.Errorf("Expected %d, but got %d", expected, avg)
 	}
 }
+
+func TestGetWholeStory(t *testing.T) {
+	sampleString := "10-hello-20-world"
+	expected := "hello world"
+	if wholeStory := getWholeStory(sampleString); wholeStory != expected {
+		t.Errorf("Expected %s, but got %s", expected, wholeStory)
+	}
+}

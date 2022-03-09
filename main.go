@@ -38,3 +38,11 @@ func getAverageNumber(arg string) int {
 	}
 	return sum / len(numberSamples)
 }
+
+func getWholeStory(arg string) string {
+	_, stringSamples, err := testValidity(arg)
+	if err != nil {
+		panic("Given string is not valid")
+	}
+	return strings.Join(stringSamples, " ")
+}
