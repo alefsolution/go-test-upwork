@@ -46,3 +46,35 @@ func getWholeStory(arg string) string {
 	}
 	return strings.Join(stringSamples, " ")
 }
+
+func getStoryStat(arg string) (string, string, int, []string) {
+	_, stringSamples, err := testValidity(arg)
+	if err != nil {
+		panic("Given string is not valid")
+	}
+
+	shortestWord := stringSamples[0]
+	longestWord := stringSamples[0]
+	totalLength := 0
+
+	for _, word := range stringSamples {
+		totalLength += len(word)
+		if len(word) < len(shortestWord) {
+			shortestWord = word
+		}
+		if len(word) > len(longestWord) {
+			longestWord = word
+		}
+	}
+	averageLength := totalLength / len(stringSamples)
+
+	var avgWords []string
+	averageLength = totalLength / len(stringSamples)
+	for _, word := range stringSamples {
+		if len(word) == averageLength {
+			avgWords = append(avgWords, word)
+		}
+	}
+
+	return shortestWord, longestWord, averageLength, avgWords
+}

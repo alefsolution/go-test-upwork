@@ -33,3 +33,22 @@ func TestGetWholeStory(t *testing.T) {
 		t.Errorf("Expected %s, but got %s", expected, wholeStory)
 	}
 }
+
+func TestGetStoryStat(t *testing.T) {
+	sampleString := "10-hello-20-world-30-hooray-40-yess"
+	shortestWord, longestWord, averageLength, avgWords := getStoryStat(sampleString)
+	if shortestWord != "yess" {
+		t.Errorf("Expected %s, but got %s", "yess", shortestWord)
+	}
+	if longestWord != "hooray" {
+		t.Errorf("Expected %s, but got %s", "hooray", longestWord)
+	}
+	if averageLength != 5 {
+		t.Errorf("Expected %d, but got %d", 5, averageLength)
+	}
+	for _, word := range avgWords {
+		if _, found := Find([]string{"hello", "world"}, word); !found {
+			t.Errorf("Expected %s, but not found in the average length words", word)
+		}
+	}
+}
