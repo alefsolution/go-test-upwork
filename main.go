@@ -2,8 +2,10 @@ package main
 
 import (
 	"errors"
+	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -77,4 +79,22 @@ func getStoryStat(arg string) (string, string, int, []string) {
 	}
 
 	return shortestWord, longestWord, averageLength, avgWords
+}
+
+func generate(flag bool) string {
+	var result []string
+	s := rand.NewSource(time.Now().UnixNano())
+	numberOfSamples := rand.New(s).Intn(10) + 2
+	for i := 0; i < numberOfSamples; i++ {
+		if i%2 == 0 {
+			if flag == true {
+				result = append(result, RandString(NUMERIC))
+			} else {
+				result = append(result, RandString(ALPHABETIC))
+			}
+		} else {
+			result = append(result, RandString(ALPHABETIC))
+		}
+	}
+	return strings.Join(result, "-")
 }

@@ -47,8 +47,17 @@ func TestGetStoryStat(t *testing.T) {
 		t.Errorf("Expected %d, but got %d", 5, averageLength)
 	}
 	for _, word := range avgWords {
-		if _, found := Find([]string{"hello", "world"}, word); !found {
+		if _, found := FindInArray([]string{"hello", "world"}, word); !found {
 			t.Errorf("Expected %s, but not found in the average length words", word)
 		}
+	}
+}
+
+func TestGenerate(t *testing.T) {
+	if _, _, err := testValidity(generate(true)); err != nil {
+		t.Errorf("Expected valid, but got invalid")
+	}
+	if _, _, err := testValidity(generate(false)); err == nil {
+		t.Errorf("Expected invalid, but got valid")
 	}
 }
